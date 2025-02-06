@@ -198,6 +198,9 @@ namespace Coffee.UIEffects
         [SerializeField]
         protected float m_EdgeShinyWidth = 0.5f;
 
+        [SerializeField]
+        protected Vector2 m_EdgeShinyCenter = new Vector2(0.5f, 0.5f);
+
         [Range(-5, 5)]
         [SerializeField]
         protected float m_EdgeShinyAutoPlaySpeed = 1f;
@@ -775,9 +778,20 @@ namespace Coffee.UIEffects
             get => m_EdgeShinyWidth;
             set
             {
-                value = Mathf.Clamp(value, 0, 1);
+                //value = Mathf.Clamp(value, 0, 1);
                 if (Mathf.Approximately(m_EdgeShinyWidth, value)) return;
                 context.edgeShinyWidth = m_EdgeShinyWidth = value;
+                SetMaterialDirty();
+            }
+        }
+
+        public Vector2 edgeShinyCenter
+        {
+            get => m_EdgeShinyCenter;
+            set
+            {
+                if(m_EdgeShinyCenter == value) return;
+                context.edgeShinyCenter = m_EdgeShinyCenter = value;
                 SetMaterialDirty();
             }
         }
@@ -998,6 +1012,7 @@ namespace Coffee.UIEffects
             c.edgeColorFilter = m_EdgeColorFilter;
             c.edgeColor = m_EdgeColor;
             c.edgeShinyWidth = m_EdgeShinyWidth;
+            c.edgeShinyCenter = m_EdgeShinyCenter;
             c.edgeShinyAutoPlaySpeed = m_EdgeShinyAutoPlaySpeed;
             c.patternArea = m_PatternArea;
 
@@ -1136,6 +1151,7 @@ namespace Coffee.UIEffects
             m_EdgeColorFilter = preset.m_EdgeColorFilter;
             m_EdgeColor = preset.m_EdgeColor;
             m_EdgeShinyWidth = preset.m_EdgeShinyWidth;
+            m_EdgeShinyCenter = preset.m_EdgeShinyCenter;
             m_EdgeShinyAutoPlaySpeed = preset.m_EdgeShinyAutoPlaySpeed;
             m_PatternArea = preset.m_PatternArea;
 
@@ -1209,6 +1225,7 @@ namespace Coffee.UIEffects
             m_EdgeColorFilter = c.edgeColorFilter;
             m_EdgeColor = c.edgeColor;
             m_EdgeShinyWidth = c.edgeShinyWidth;
+            m_EdgeShinyCenter = c.edgeShinyCenter;
             m_EdgeShinyAutoPlaySpeed = c.edgeShinyAutoPlaySpeed;
             m_PatternArea = c.patternArea;
 

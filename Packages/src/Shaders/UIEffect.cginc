@@ -29,6 +29,7 @@ uniform const int _ShadowColorGlow;
 uniform const float _EdgeWidth;
 uniform const float _EdgeShinyAutoPlaySpeed;
 uniform const float _EdgeShinyWidth;
+uniform const float2 _EdgeShinyCenter;
 uniform const half4 _EdgeColor;
 uniform const int _PatternArea;
 
@@ -538,7 +539,7 @@ float edge(float2 uv, const float4 uvMask, float width)
 int is_edge_shiny(const float2 uvLocal)
 {
     #if EDGE_SHINY
-    const float deg = atan2(uvLocal.y - 0.5, uvLocal.x - 0.5) / UNITY_PI;
+    const float deg = atan2(uvLocal.y - _EdgeShinyCenter.y, uvLocal.x - _EdgeShinyCenter.x) / UNITY_PI;
     return frac(_Time.y * _EdgeShinyAutoPlaySpeed + deg) < _EdgeShinyWidth;
     #else
     return 1;
